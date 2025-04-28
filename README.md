@@ -1,40 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# **Leaderboard Bloque**
 
-## Getting Started
+A lightweight and responsive single-page application (SPA) built with **Next.js** and **TypeScript**. This app displays a live leaderboard and a marketplace for a gaming application. The app is optimized for performance and supports Progressive Web App (PWA) features.
 
-First, run the development server:
+## **Features**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Displays a live leaderboard with player stats.
+- Integrates with the game's market and displays available items for purchase.
+- Responsive design that adapts to various screen sizes (phone, tablet, desktop).
+- Works offline using service workers (PWA).
+- Fast and optimized for performance.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## **Tech Stack**
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js (React.js)
+- **Backend**: External APIs (Leaderboard & Market data)
+- **TypeScript**: Type safety for all components.
+- **PWA**: Progressive Web App support for offline functionality.
+- **Webpack**: For bundling the application.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## **Live Demo**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+[View the live demo here](https://leaderboard-bloque-test.vercel.app/) 
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## **Installation**
 
-## Learn More
+### **Prerequisites**
 
-To learn more about Next.js, take a look at the following resources:
+- **Node.js** (LTS version recommended)
+- **npm** or **yarn**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### **Steps**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+   ```bash
+   git clone https://github.com/Andrestheran/leaderboard-bloque-test.git
+   cd leaderboard-bloque-test
