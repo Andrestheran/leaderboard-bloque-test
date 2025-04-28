@@ -97,11 +97,19 @@ export default function Home() {
                   key={player.username}
                   className="border-b hover:bg-[#5C77FF]/50 transition-colors"
                 >
-                  <td className="p-4">{player.rank}</td>
-                  <td className="p-4 font-medium">{player.username}</td>
-                  <td className="p-4">{player.level}</td>
-                  <td className="p-4">{player.xp.toLocaleString()}</td>
-                  <td className="p-4">{player.gold.toLocaleString()}</td>
+                  <td className="p-4 text-black font-semibold ">
+                    {player.rank}
+                  </td>
+                  <td className="p-4 font-medium text-black">
+                    {player.username}
+                  </td>
+                  <td className="p-4 text-black">{player.level}</td>
+                  <td className="p-4 text-black">
+                    {player.xp.toLocaleString()}
+                  </td>
+                  <td className="p-4 text-[#5C77FF]">
+                    {player.gold.toLocaleString()}
+                  </td>
                 </tr>
               ))}
             </tbody>
