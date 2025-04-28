@@ -102,18 +102,76 @@ export default function Home() {
               {currentPlayers.map((player) => (
                 <tr
                   key={player.username}
-                  className="border-b hover:bg-[#5C77FF]/50 transition-colors"
+                  className={`border-b transition-colors ${
+                    player.rank === 1
+                      ? "bg-yellow-200 hover:from-yellow-200 "
+                      : player.rank === 2
+                      ? "bg-gray-300 hover:from-gray-200 "
+                      : player.rank === 3
+                      ? "bg-yellow-600 hover:from-amber-200"
+                      : "hover:bg-[#5C77FF]/50"
+                  }`}
                 >
-                  <td className="p-4 text-black font-normal">{player.rank}</td>
-                  <td className="p-4 font-medium text-black">
-                    {player.username}
+                  <td className="p-4">
+                    <div className="flex items-center gap-2">
+                      {player.rank <= 3 ? (
+                        <span
+                          className={`text-2xl ${
+                            player.rank === 1
+                              ? "text-yellow-500"
+                              : player.rank === 2
+                              ? "text-gray-400"
+                              : "text-amber-600"
+                          }`}
+                        >
+                          {player.rank === 1
+                            ? "🥇"
+                            : player.rank === 2
+                            ? "🥈"
+                            : "🥉"}
+                        </span>
+                      ) : (
+                        <span className="text-black font-normal">
+                          {player.rank}
+                        </span>
+                      )}
+                    </div>
                   </td>
-                  <td className="p-4 text-black font-normal">{player.level}</td>
-                  <td className="p-4 text-black font-normal">
-                    {player.xp.toLocaleString()}
+                  <td className="p-4">
+                    <span
+                      className={`${
+                        player.rank <= 3 ? "font-bold text-lg" : "font-medium"
+                      } text-black transition-transform duration-300 hover:scale-110 hover:text-[#5C77FF]`}
+                    >
+                      {player.username}
+                    </span>
                   </td>
-                  <td className="p-4 text-[#5C77FF] font-normal">
-                    {player.gold.toLocaleString()}
+                  <td className="p-4">
+                    <span
+                      className={`${
+                        player.rank <= 3 ? "font-bold" : "font-normal"
+                      } text-black`}
+                    >
+                      {player.level}
+                    </span>
+                  </td>
+                  <td className="p-4">
+                    <span
+                      className={`${
+                        player.rank <= 3 ? "font-bold" : "font-normal"
+                      } text-black`}
+                    >
+                      {player.xp.toLocaleString()}
+                    </span>
+                  </td>
+                  <td className="p-4">
+                    <span
+                      className={`${
+                        player.rank <= 3 ? "font-bold" : "font-normal"
+                      } text-black`}
+                    >
+                      {player.gold.toLocaleString()}
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -121,22 +179,43 @@ export default function Home() {
           </table>
         </div>
         {totalPlayersPages > 1 && (
-          <div className="flex justify-center mt-8 space-x-2">
-            {Array.from({ length: totalPlayersPages }, (_, i) => i + 1).map(
-              (page) => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPlayersPage(page)}
-                  className={`px-4 py-2 rounded-lg font-medium ${
-                    currentPlayersPage === page
-                      ? "bg-[#5C77FF] text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  {page}
-                </button>
-              )
-            )}
+          <div className="mt-8">
+            <div className="flex justify-center overflow-x-auto pb-2">
+              <div className="flex space-x-1 sm:space-x-2 min-w-max">
+                {Array.from({ length: totalPlayersPages }, (_, i) => i + 1)
+                  .filter((page) => {
+                    const currentPage = currentPlayersPage;
+                    const totalPages = totalPlayersPages;
+                    if (totalPages <= 5) return true;
+                    if (window.innerWidth < 768) {
+                      // Mobile
+                      if (currentPage <= 3) return page <= 5;
+                      if (currentPage >= totalPages - 2)
+                        return page >= totalPages - 4;
+                      return page >= currentPage - 2 && page <= currentPage + 2;
+                    } else {
+                      // Tablet/Desktop
+                      if (currentPage <= 5) return page <= 10;
+                      if (currentPage >= totalPages - 5)
+                        return page >= totalPages - 9;
+                      return page >= currentPage - 5 && page <= currentPage + 4;
+                    }
+                  })
+                  .map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPlayersPage(page)}
+                      className={`px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base rounded-lg font-medium ${
+                        currentPlayersPage === page
+                          ? "bg-[#5C77FF] text-white"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -170,20 +249,47 @@ export default function Home() {
         </div>
 
         {totalPages > 1 && (
-          <div className="flex justify-center mt-8 space-x-2">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`px-4 py-2 rounded-lg font-medium ${
-                  currentPage === page
-                    ? "bg-[#5C77FF] text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {page}
-              </button>
-            ))}
+          <div className="mt-8">
+            <div className="flex justify-center overflow-x-auto pb-2">
+              <div className="flex space-x-1 sm:space-x-2 min-w-max">
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter((page) => {
+                    const currentPageNum = currentPage;
+                    const totalPagesNum = totalPages;
+                    if (totalPagesNum <= 5) return true;
+                    if (window.innerWidth < 768) {
+                      // Mobile
+                      if (currentPageNum <= 3) return page <= 5;
+                      if (currentPageNum >= totalPagesNum - 2)
+                        return page >= totalPagesNum - 4;
+                      return (
+                        page >= currentPageNum - 2 && page <= currentPageNum + 2
+                      );
+                    } else {
+                      // Tablet/Desktop
+                      if (currentPageNum <= 5) return page <= 10;
+                      if (currentPageNum >= totalPagesNum - 5)
+                        return page >= totalPagesNum - 9;
+                      return (
+                        page >= currentPageNum - 5 && page <= currentPageNum + 4
+                      );
+                    }
+                  })
+                  .map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base rounded-lg font-medium ${
+                        currentPage === page
+                          ? "bg-[#5C77FF] text-white"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
